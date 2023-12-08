@@ -59,15 +59,15 @@ impl From<char> for Direction {
     }
 }
 
-pub fn run(input_file_path: &str){
+pub fn run(input_file_path: &str) {
     let input_content = fs::read_to_string(input_file_path).unwrap();
-    let (directions, nodes) = input_content.split_once('\n').unwrap();
-    let directions = directions
+    let lines = input_content.lines().collect::<Vec<&str>>();
+    let directions = lines[0]
         .chars()
         .map(Direction::from)
         .collect::<Vec<Direction>>();
-    let nodes_map = nodes
-        .split('\n')
+    let nodes_map = lines[1..]
+        .iter()
         .filter(|&n| !n.is_empty())
         .map(|n| {
             let (target_node, node_options) = n.split_once('=').unwrap();
@@ -83,7 +83,6 @@ pub fn run(input_file_path: &str){
         // dbg!("options", options);
         let index = step % directions.len();
         node = directions[index].choose_node(options);
-        dbg!(index);
         // dbg!("node", node);
         step += 1;
         if node.is_end() {
@@ -95,6 +94,6 @@ pub fn run(input_file_path: &str){
 }
 
 #[bench]
-fn bench_challenge_8(bencher: &mut Bencher){
-    run("/workspaces/rust/advent_of_code_2023/inputs/challenge_8.txt")
+fn bench_challenge_8(bencher: &mut Bencher) {
+    run("/workspaces/advent_of_code_2023/inputs/challenge_8.txt")
 }

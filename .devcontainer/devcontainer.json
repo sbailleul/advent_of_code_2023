@@ -3,7 +3,7 @@
 {
 	"name": "Rust",
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-	"image": "rustlang/rust:nightly-buster-slim",
+	"image": "mcr.microsoft.com/devcontainers/rust:nightly-bullseye",
 	"customizations": {
 		"vscode": {
 			"extensions": [

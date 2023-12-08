@@ -75,9 +75,12 @@ pub fn run(){
         .collect::<HashMap<Node, NodeOptions>>();
     let mut step = 0;
     let mut node = directions[step].choose_node(&nodes_map[&Node::start()]);
+    dbg!("start node", node);
     loop {
         let options = &nodes_map[node];
+        dbg!("options", options);
         node = directions[step % directions.len()].choose_node(options);
+        dbg!("node", node);
         step += 1;
         if node.is_end() {
             break;

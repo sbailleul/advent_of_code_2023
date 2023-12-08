@@ -83,6 +83,6 @@ pub fn run(){
             break;
         }
     }
-    dbg!(step);
+    dbg!(step + 1);
 
 }

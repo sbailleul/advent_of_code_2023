@@ -76,11 +76,12 @@ pub fn run(){
     let mut step = 0;
     let mut node = directions[step].choose_node(&nodes_map[&Node::start()]);
     loop {
-        node = directions[step % directions.len()].choose_node(&nodes_map[node]);
+        let options = &nodes_map[node];
+        node = directions[step % directions.len()].choose_node(options);
+        step += 1;
         if node.is_end() {
             break;
         }
-        step += 1;
     }
     dbg!(step);
 

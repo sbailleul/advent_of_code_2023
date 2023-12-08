@@ -1,5 +1,7 @@
 use std::{collections::HashMap, env, fs};
 
+use test::Bencher;
+
 #[derive(Debug)]
 enum Direction {
     L,
@@ -57,8 +59,7 @@ impl From<char> for Direction {
     }
 }
 
-pub fn run(){
-    let input_file_path = env::args().last().unwrap();
+pub fn run(input_file_path: &str){
     let input_content = fs::read_to_string(input_file_path).unwrap();
     let (directions, nodes) = input_content.split_once('\n').unwrap();
     let directions = directions
@@ -75,17 +76,25 @@ pub fn run(){
         .collect::<HashMap<Node, NodeOptions>>();
     let mut step = 0;
     let mut node = directions[step].choose_node(&nodes_map[&Node::start()]);
-    dbg!("start node", node);
+    step += 1;
+    // dbg!("start node", node);
     loop {
         let options = &nodes_map[node];
-        dbg!("options", options);
-        node = directions[step % directions.len()].choose_node(options);
-        dbg!("node", node);
+        // dbg!("options", options);
+        let index = step % directions.len();
+        node = directions[index].choose_node(options);
+        dbg!(index);
+        // dbg!("node", node);
         step += 1;
         if node.is_end() {
             break;
         }
     }
-    dbg!(step + 1);
+    dbg!(step);
 
+}
+
+#[bench]
+fn bench_challenge_8(bencher: &mut Bencher){
+    run("/workspaces/rust/advent_of_code_2023/inputs/challenge_8.txt")
 }

@@ -1,4 +1,4 @@
-use std::{collections::HashMap, env, fs};
+use std::{collections::HashMap, env, fs, sync::mpsc};
 
 use test::Bencher;
 
@@ -23,6 +23,7 @@ impl<'a> From<&'a str> for Node<'a> {
         return Node(value.trim());
     }
 }
+
 impl Node<'_> {
     fn start() -> Self {
         Node("AAA")
@@ -30,8 +31,17 @@ impl Node<'_> {
     fn end_node() -> Self {
         Node("ZZZ")
     }
-    fn is_end<'a>(&'a self) -> bool {
+    fn is_end(&self) -> bool {
         self == &Node::end_node()
+    }
+    fn is_ghost_equivalent(&self, other: &Node<'_>) -> bool {
+        self.0[..2] == other.0[..2]
+    }
+    fn is_ghost_start(&self) -> bool {
+        self.0.ends_with('A')
+    }
+    fn is_ghost_end(&self) -> bool {
+        self.0.ends_with('Z')
     }
 }
 
@@ -59,6 +69,8 @@ impl From<char> for Direction {
     }
 }
 
+
+
 pub fn run(input_file_path: &str) {
     let input_content = fs::read_to_string(input_file_path).unwrap();
     let lines = input_content.lines().collect::<Vec<&str>>();
@@ -69,26 +81,29 @@ pub fn run(input_file_path: &str) {
     let nodes_map = lines[1..]
         .iter()
         .filter(|&n| !n.is_empty())
-        .map(|n| {
+        .map(|n: &&str| {
             let (target_node, node_options) = n.split_once('=').unwrap();
             (Node::from(target_node), NodeOptions::from(node_options))
         })
         .collect::<HashMap<Node, NodeOptions>>();
+
+    let mut nodes = nodes_map.keys().filter(|n| n.is_ghost_start()).collect::<Vec<&Node<'_>>>();
+    
     let mut step = 0;
-    let mut node = directions[step].choose_node(&nodes_map[&Node::start()]);
-    step += 1;
     loop {
-        let options = &nodes_map[node];
-        let index = step % directions.len();
-        node = directions[index].choose_node(options);
-        step += 1;
-        if node.is_end() {
+        let direction_idx = step % directions.len();
+        for (node_idx, node) in nodes.clone().iter().enumerate(){
+            nodes[node_idx]= directions[direction_idx].choose_node(&nodes_map[node]);
+        }
+        if nodes.iter().all(|&n|n.is_ghost_end()) {
             break;
         }
+        step += 1;
     }
     dbg!(step);
-
 }
+
+
 
 #[bench]
 fn bench_challenge_8(bencher: &mut Bencher) {

@@ -4,5 +4,5 @@ Use vscode to start project in devcontainer
 # Start challenge
 Go in root of git repository
 
-## challenge 8 
-Run ```cargo run -- $(pwd)/inputs/challenge_8.tx```
+Run challenge : ```cargo run -- [challenge_number_id] [input_file_path]```  
+e.g : ```cargo run -- 8 $(pwd)/inputs/challenge_8.tx```

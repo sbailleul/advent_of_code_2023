@@ -77,13 +77,10 @@ pub fn run(input_file_path: &str) {
     let mut step = 0;
     let mut node = directions[step].choose_node(&nodes_map[&Node::start()]);
     step += 1;
-    // dbg!("start node", node);
     loop {
         let options = &nodes_map[node];
-        // dbg!("options", options);
         let index = step % directions.len();
         node = directions[index].choose_node(options);
-        // dbg!("node", node);
         step += 1;
         if node.is_end() {
             break;

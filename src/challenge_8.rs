@@ -1,6 +1,7 @@
-use std::{collections::HashMap, env, fs, sync::mpsc};
+use std::{collections::HashMap};
 
 use test::Bencher;
+
 
 #[derive(Debug)]
 enum Direction {
@@ -70,9 +71,14 @@ impl From<char> for Direction {
 }
 
 
+struct NodesPath<'a>{
+    end: Node<'a>,
+    directions: &'a [Direction]
+}
 
-pub fn run(input_file_path: &str) {
-    let input_content = fs::read_to_string(input_file_path).unwrap();
+
+pub fn run(input_content: &str) {
+
     let lines = input_content.lines().collect::<Vec<&str>>();
     let directions = lines[0]
         .chars()
@@ -88,7 +94,6 @@ pub fn run(input_file_path: &str) {
         .collect::<HashMap<Node, NodeOptions>>();
 
     let mut nodes = nodes_map.keys().filter(|n| n.is_ghost_start()).collect::<Vec<&Node<'_>>>();
-    
     let mut step = 0;
     loop {
         let direction_idx = step % directions.len();

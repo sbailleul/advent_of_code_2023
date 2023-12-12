@@ -21,11 +21,9 @@ const DIGITS: [DigitValue; 18] = [
 
 struct DigitValue(&'static str, u32);
 
-pub fn run(input_content: &str) {
-    part_2(input_content);
-}
 
-fn part_1(input_content: &str) {
+
+pub fn step_1(input_content: &str) {
     let res = input_content
         .lines()
         .map(|line| {
@@ -53,11 +51,10 @@ fn get_line_digit(text: &str) -> u32 {
     res.sort_by(|d1, d2| d1.0.cmp(&d2.0));
     let first_digit = res.first().unwrap().1;
     let last_digit = res.last().unwrap().1;
-    dbg!(text, first_digit, last_digit);
     first_digit * 10 + last_digit
 }
 
-fn part_2(input_content: &str) {
+pub fn step_2(input_content: &str) {
     let res = input_content.lines().map(get_line_digit).sum::<u32>();
     dbg!(res);
 }

@@ -77,7 +77,7 @@ struct NodesPath<'a>{
 }
 
 
-pub fn run(input_content: &str) {
+pub fn step(input_content: &str) {
 
     let lines = input_content.lines().collect::<Vec<&str>>();
     let directions = lines[0]
@@ -112,5 +112,5 @@ pub fn run(input_content: &str) {
 
 #[bench]
 fn bench_challenge_8(bencher: &mut Bencher) {
-    run("/workspaces/advent_of_code_2023/inputs/challenge_8.txt")
+    step("/workspaces/advent_of_code_2023/inputs/challenge_8.txt")
 }

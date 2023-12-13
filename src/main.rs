@@ -31,6 +31,7 @@ fn main() {
         ((1, 1), challenge_1::step_1 as fn(&str)->String),
         ((1, 2), challenge_1::step_2 as fn(&str)->String),
         ((2, 1), challenge_2::step_1 as fn(&str)->String),
+        ((2, 2), challenge_2::step_2 as fn(&str)->String),
         ((8, 1), challenge_8::step as fn(&str)->String),
     ]);
     let res = challenges[&(challenge_id, step)](&input_content);

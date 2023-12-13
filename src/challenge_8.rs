@@ -1,6 +1,4 @@
-use std::{collections::HashMap};
-
-use test::Bencher;
+use std::collections::HashMap;
 
 
 #[derive(Debug)]
@@ -70,15 +68,12 @@ impl From<char> for Direction {
     }
 }
 
-
-struct NodesPath<'a>{
+struct NodesPath<'a> {
     end: Node<'a>,
-    directions: &'a [Direction]
+    directions: &'a [Direction],
 }
 
-
-pub fn step(input_content: &str) {
-
+pub fn step(input_content: &str) -> String {
     let lines = input_content.lines().collect::<Vec<&str>>();
     let directions = lines[0]
         .chars()
@@ -93,24 +88,22 @@ pub fn step(input_content: &str) {
         })
         .collect::<HashMap<Node, NodeOptions>>();
 
-    let mut nodes = nodes_map.keys().filter(|n| n.is_ghost_start()).collect::<Vec<&Node<'_>>>();
+    let mut nodes = nodes_map
+        .keys()
+        .filter(|n| n.is_ghost_start())
+        .collect::<Vec<&Node<'_>>>();
     let mut step = 0;
     loop {
         let direction_idx = step % directions.len();
-        for (node_idx, node) in nodes.clone().iter().enumerate(){
-            nodes[node_idx]= directions[direction_idx].choose_node(&nodes_map[node]);
+        for (node_idx, node) in nodes.clone().iter().enumerate() {
+            nodes[node_idx] = directions[direction_idx].choose_node(&nodes_map[node]);
         }
-        if nodes.iter().all(|&n|n.is_ghost_end()) {
+        if nodes.iter().all(|&n| n.is_ghost_end()) {
             break;
         }
         step += 1;
     }
-    dbg!(step);
+    step.to_string()
 }
 
 
-
-#[bench]
-fn bench_challenge_8(bencher: &mut Bencher) {
-    step("/workspaces/advent_of_code_2023/inputs/challenge_8.txt")
-}

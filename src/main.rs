@@ -24,13 +24,15 @@ struct Cli {
 
 
 fn main() {
-    let args = Cli::parse();
+    let Cli { step, challenge_id, file_path } = Cli::parse();
 
-    let input_content = fs::read_to_string(args.file_path).unwrap();
+    let input_content = fs::read_to_string(file_path).unwrap();
     let challenges = HashMap::from([
-        ((8, 1), challenge_8::step as fn(&str)),
-        ((1, 1), challenge_1::step_1 as fn(&str)),
-        ((1, 2), challenge_1::step_2 as fn(&str)),
+        ((1, 1), challenge_1::step_1 as fn(&str)->String),
+        ((1, 2), challenge_1::step_2 as fn(&str)->String),
+        ((2, 1), challenge_2::step_1 as fn(&str)->String),
+        ((8, 1), challenge_8::step as fn(&str)->String),
     ]);
-    challenges[&(args.challenge_id, args.step)](&input_content);
+    let res = challenges[&(challenge_id, step)](&input_content);
+    println!("Result for step {step} of challenge {challenge_id} is {res}")
 }

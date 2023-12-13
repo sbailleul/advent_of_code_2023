@@ -23,7 +23,7 @@ struct DigitValue(&'static str, u32);
 
 
 
-pub fn step_1(input_content: &str) {
+pub fn step_1(input_content: &str)-> String {
     let res = input_content
         .lines()
         .map(|line| {
@@ -33,7 +33,7 @@ pub fn step_1(input_content: &str) {
             first_digit.unwrap() * 10 + last_digit.unwrap()
         })
         .sum::<u32>();
-    dbg!(res);
+    res.to_string()
 }
 
 #[derive(Debug)]
@@ -54,7 +54,7 @@ fn get_line_digit(text: &str) -> u32 {
     first_digit * 10 + last_digit
 }
 
-pub fn step_2(input_content: &str) {
+pub fn step_2(input_content: &str)->String  {
     let res = input_content.lines().map(get_line_digit).sum::<u32>();
-    dbg!(res);
+    res.to_string()
 }

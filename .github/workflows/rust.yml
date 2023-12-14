@@ -11,10 +11,13 @@ on:
         description: 'Challenge id'
         required: true
         default: '1'
+        type: string
       step:
         description: 'Step'
         required: true
         default: '1'
+        type: string
+        
 env:
   CARGO_TERM_COLOR: always
 

@@ -20,8 +20,8 @@ on:
         
 env:
   CARGO_TERM_COLOR: always
-  CHALLENGE_ID: ${{ inputs.challenge_id }} != '' & ${{ inputs.challenge_id }} `| '1'
-  STEP: ${{ inputs.step }} != '' & ${{ inputs.step }} `| '1'
+  CHALLENGE_ID: ${{ inputs.challenge_id  != '' && inputs.challenge_id  || '1' }}
+  STEP: ${{ inputs.step  != '' && inputs.step  || '1' }}
 jobs:
   build:
     runs-on: ubuntu-latest

@@ -5,7 +5,6 @@ use std::{
 
 use clap::Parser;
 
-extern crate test;
 mod challenge_1;
 mod challenge_2;
 mod challenge_8;

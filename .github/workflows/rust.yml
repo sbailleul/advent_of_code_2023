@@ -26,4 +26,4 @@ jobs:
     - name: Build
       run: cargo build --verbose
     - name: Run tests
-      run: cargo run -- --file-path $(pwd)/inputs/challenge${{ github.event.inputs.challenge_id }}.txt --challenge-id ${{ github.event.inputs.challenge_id }} --step ${{ github.event.inputs.step }}
+      run: cargo run -- --file-path $(pwd)/inputs/challenge${{ inputs.challenge_id }}.txt --challenge-id ${{ inputs.challenge_id }} --step ${{ inputs.step }}

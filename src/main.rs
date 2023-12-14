@@ -1,5 +1,3 @@
-#![feature(test)]
-
 use std::{
     collections::{HashMap, VecDeque},
     env, fs,

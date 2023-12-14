@@ -1,23 +1,35 @@
-on:
-  workflow_dispatch:
-    inputs:
-      print_tags:
-        description: 'True to print to STDOUT'
-        required: true
-        type: boolean
-      tags:
-        description: 'Test scenario tags'
-        required: true
-        type: string
-      environment:
-        description: 'Environment to run tests against'
-        type: string
-        required: true
+name: Rust
 
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+     inputs:
+      challenge_id:
+        description: 'Challenge id'
+        required: true
+        default: '1'
+        type: string
+      step:
+        description: 'Step'
+        required: true
+        default: '1'
+        type: string
+        
+env:
+  CARGO_TERM_COLOR: always
+  CHALLENGE_ID: ${{ inputs.challenge_id }} != '' & ${{ inputs.challenge_id }} `| '1'
+  STEP: ${{ inputs.step }} != '' & ${{ inputs.step }} `| '1'
 jobs:
-  print-tag:
+  build:
     runs-on: ubuntu-latest
-    if:  ${{ inputs.print_tags }} 
     steps:
-      - name: Print the input tag to STDOUT
-        run: echo  The tags are ${{ inputs.tags }} 
+    - uses: actions/checkout@v3
+    - name: Print inputs
+      run: echo challenge_id => ${{inputs.challenge_id}} , step => ${{inputs.step}}
+    - name: Build
+      run: cargo build --verbose
+    - name: Run tests
+      run: cargo run -- --file-path $(pwd)/inputs/challenge$(CHALLENGE_ID).txt --challenge-id $(CHALLENGE_ID) --step $(STEP)

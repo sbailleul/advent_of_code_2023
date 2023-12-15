@@ -8,7 +8,7 @@ use clap::Parser;
 mod challenge_1;
 mod challenge_2;
 mod challenge_8;
-
+mod challenge_15;
 #[derive(Parser)]
 struct Cli {
     #[arg(short, long, default_value_t=1)]
@@ -30,6 +30,7 @@ fn main() {
         ((2, 1), challenge_2::step_1 as fn(&str)->String),
         ((2, 2), challenge_2::step_2 as fn(&str)->String),
         ((8, 1), challenge_8::step as fn(&str)->String),
+        ((15, 1), challenge_15::step_1 as fn(&str)->String),
     ]);
     let res = challenges[&(challenge_id, step)](&input_content);
     println!("Result for step {step} of challenge {challenge_id} is {res}")

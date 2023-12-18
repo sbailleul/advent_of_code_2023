@@ -1,13 +1,11 @@
 use std::collections::{HashMap, HashSet};
 use std::hash::Hash;
-use std::panic::resume_unwind;
+
 use std::vec;
 
 use crate::matrix::MatrixWrapper;
-//538028
 struct Number {
     value: u32,
-    digits: Vec<char>,
     neighbors: HashSet<Neighbor>,
 }
 
@@ -17,7 +15,6 @@ impl Number {
     }
     fn new(digits: &Vec<char>, neighbors: &HashSet<Neighbor>) -> Self {
         Self {
-            digits: digits.clone(),
             neighbors: neighbors.clone(),
             value: digits.iter().collect::<String>().parse::<u32>().unwrap(),
         }

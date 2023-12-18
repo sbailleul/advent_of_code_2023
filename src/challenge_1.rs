@@ -42,7 +42,7 @@ fn get_line_digit(text: &str) -> u32 {
     let mut res = DIGITS
         .iter()
         .enumerate()
-        .flat_map(|(i, digit)| {
+        .flat_map(|(_i, digit)| {
             text.match_indices(digit.0)
                 .map(|(pos, _)| DigitPosition(pos, digit.1))
         })

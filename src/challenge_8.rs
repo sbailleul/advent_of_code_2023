@@ -68,11 +68,6 @@ impl From<char> for Direction {
     }
 }
 
-struct NodesPath<'a> {
-    end: Node<'a>,
-    directions: &'a [Direction],
-}
-
 pub fn step(input_content: &str) -> String {
     let lines = input_content.lines().collect::<Vec<&str>>();
     let directions = lines[0]

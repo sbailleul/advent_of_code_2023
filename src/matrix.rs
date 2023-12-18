@@ -1,4 +1,4 @@
-use std::ops::Index;
+
 pub type Matrix<T> = Vec<Vec<T>>;
 
 #[derive(Debug)]

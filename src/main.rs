@@ -1,6 +1,5 @@
 use std::{
-    collections::{HashMap, VecDeque},
-    env, fs,
+    collections::{HashMap}, fs,
 };
 
 use clap::Parser;
@@ -8,6 +7,7 @@ mod matrix;
 mod challenge_1;
 mod challenge_2;
 mod challenge_3;
+mod challenge_4;
 mod challenge_8;
 mod challenge_15;
 #[derive(Parser)]
@@ -32,10 +32,12 @@ fn main() {
         ((2, 2), challenge_2::step_2 as fn(&str)->String),
         ((3, 1), challenge_3::step_1 as fn(&str)->String),
         ((3, 2), challenge_3::step_2 as fn(&str)->String),
+        ((4, 1), challenge_4::step_1 as fn(&str)->String),
+        ((4, 2), challenge_4::step_2 as fn(&str)->String),
         ((8, 1), challenge_8::step as fn(&str)->String),
         ((15, 1), challenge_15::step_1 as fn(&str)->String),
     ]);
-    
+
     if let Some(step_handler) = challenges.get(&(challenge_id, step)){
         let res = step_handler(&input_content);
         println!("Result for step {step} of challenge {challenge_id} is {res}")

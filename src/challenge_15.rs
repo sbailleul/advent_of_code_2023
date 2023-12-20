@@ -23,9 +23,14 @@ pub fn step_1(input_content: &str) -> String {
         .sum();
     steps.to_string()
 }
+#[cfg(test)]
+mod tests{
+    use crate::challenge_1::step_1;
 
-#[test]
-fn should_return_valid_hash() {
-    let input = "rn=1,cm-,qp=3,cm=2,qp-,pc=4,ot=9,ab=5,pc-,pc=6,ot=7";
-    assert_eq!(step_1(input), "1320")
+    #[test]
+    fn should_return_valid_hash() {
+        let input = "rn=1,cm-,qp=3,cm=2,qp-,pc=4,ot=9,ab=5,pc-,pc=6,ot=7";
+        assert_eq!(step_1(input), "1320")
+    }
+    
 }

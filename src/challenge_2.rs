@@ -182,37 +182,45 @@ pub fn step_2(input_content: &str) -> String {
     res.to_string()
 }
 
-#[test]
-pub fn set_should_be_valid_when_all_color_counts_are_bellow_bag_color_counts() {
-    let bag = Set {
-        blue: 19,
-        green: 18,
-        red: 16,
-    };
-    let valid_set = Set {
-        blue: 14,
-        green: 13,
-        red: 12,
-    };
-    assert!(
-        valid_set.is_valid(&bag),
-        "({valid_set}) hasn't valid colors counts for bag ({bag})"
-    )
-}
-#[test]
-pub fn set_should_be_valid_when_one_color_count_is_above_bag_color_count() {
-    let bag = Set {
-        blue: 19,
-        green: 18,
-        red: 16,
-    };
-    let invalid_set = Set {
-        blue: 20,
-        green: 13,
-        red: 12,
-    };
-    assert!(
-        !invalid_set.is_valid(&bag),
-        "({invalid_set}) hasn't valid colors counts for bag ({bag})"
-    )
+#[cfg(test)]
+mod tests{
+    use crate::challenge_2::Set;
+
+
+    #[test]
+    pub fn set_should_be_valid_when_all_color_counts_are_bellow_bag_color_counts() {
+        let bag = Set {
+            blue: 19,
+            green: 18,
+            red: 16,
+        };
+        let valid_set = Set {
+            blue: 14,
+            green: 13,
+            red: 12,
+        };
+        assert!(
+            valid_set.is_valid(&bag),
+            "({valid_set}) hasn't valid colors counts for bag ({bag})"
+        )
+    }
+    #[test]
+    pub fn set_should_be_valid_when_one_color_count_is_above_bag_color_count() {
+        let bag = Set {
+            blue: 19,
+            green: 18,
+            red: 16,
+        };
+        let invalid_set = Set {
+            blue: 20,
+            green: 13,
+            red: 12,
+        };
+        assert!(
+            !invalid_set.is_valid(&bag),
+            "({invalid_set}) hasn't valid colors counts for bag ({bag})"
+        )
+    }
+    
+
 }

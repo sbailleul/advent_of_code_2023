@@ -126,70 +126,77 @@ pub fn step_2(input_content: &str) -> String {
         .sum::<u32>();
     gears_ratio.to_string()
 }
+#[cfg(test)]
+mod tests{
+    use std::collections::HashSet;
 
-const TEST_INPUT: &str = r#"467..114..
-...*......
-..35..633.
-......#...
-617*......
-.....+.58.
-..592.....
-......755.
-...$.*....
-.664.598..
-"#;
-#[test]
-fn step_1_should_works() {
-    let res = step_1(TEST_INPUT);
-    assert_eq!("4361", res)
-}
-#[test]
-fn step_2_should_works() {
-    let res = step_2(TEST_INPUT);
-    assert_eq!("467835", res)
-}
+    use crate::challenge_3::{step_1, step_2, to_matrix, get_neighbors, Neighbor, Cell};
 
-#[test]
-fn should_return_neighbors() {
-    let matrix = to_matrix(
-        r#".....
-.633.
-.#..."#,
-    );
-    let result = get_neighbors(&matrix, 1, 1);
-    let expected_neighbors = HashSet::from([
-        Neighbor {
-            cell: Cell(0, 0),
-            value: '.',
-        },
-        Neighbor {
-            cell: Cell(0, 1),
-            value: '.',
-        },
-        Neighbor {
-            cell: Cell(0, 2),
-            value: '.',
-        },
-        Neighbor {
-            cell: Cell(1, 0),
-            value: '.',
-        },
-        Neighbor {
-            cell: Cell(1, 2),
-            value: '3',
-        },
-        Neighbor {
-            cell: Cell(2, 0),
-            value: '.',
-        },
-        Neighbor {
-            cell: Cell(2, 1),
-            value: '#',
-        },
-        Neighbor {
-            cell: Cell(2, 2),
-            value: '.',
-        },
-    ]);
-    assert_eq!(result, expected_neighbors);
+    const TEST_INPUT: &str = r#"467..114..
+    ...*......
+    ..35..633.
+    ......#...
+    617*......
+    .....+.58.
+    ..592.....
+    ......755.
+    ...$.*....
+    .664.598..
+    "#;
+    #[test]
+    fn step_1_should_works() {
+        let res = step_1(TEST_INPUT);
+        assert_eq!("4361", res)
+    }
+    #[test]
+    fn step_2_should_works() {
+        let res = step_2(TEST_INPUT);
+        assert_eq!("467835", res)
+    }
+    
+    #[test]
+    fn should_return_neighbors() {
+        let matrix = to_matrix(
+            r#".....
+    .633.
+    .#..."#,
+        );
+        let result = get_neighbors(&matrix, 1, 1);
+        let expected_neighbors = HashSet::from([
+            Neighbor {
+                cell: Cell(0, 0),
+                value: '.',
+            },
+            Neighbor {
+                cell: Cell(0, 1),
+                value: '.',
+            },
+            Neighbor {
+                cell: Cell(0, 2),
+                value: '.',
+            },
+            Neighbor {
+                cell: Cell(1, 0),
+                value: '.',
+            },
+            Neighbor {
+                cell: Cell(1, 2),
+                value: '3',
+            },
+            Neighbor {
+                cell: Cell(2, 0),
+                value: '.',
+            },
+            Neighbor {
+                cell: Cell(2, 1),
+                value: '#',
+            },
+            Neighbor {
+                cell: Cell(2, 2),
+                value: '.',
+            },
+        ]);
+        assert_eq!(result, expected_neighbors);
+    }
+    
 }

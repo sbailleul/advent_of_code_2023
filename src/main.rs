@@ -7,6 +7,7 @@ mod challenge_2;
 mod challenge_3;
 mod challenge_4;
 mod challenge_5;
+mod challenge_6;
 mod challenge_8;
 mod matrix;
 #[derive(Parser)]
@@ -42,6 +43,8 @@ fn main() {
         ((4, 2), challenge_4::step_2 as fn(&str) -> String),
         ((5, 1), challenge_5::step_1 as fn(&str) -> String),
         ((5, 2), challenge_5::step_2 as fn(&str) -> String),
+        ((6, 1), challenge_6::step_1 as fn(&str) -> String),
+        ((6, 2), challenge_6::step_2 as fn(&str) -> String),
         ((8, 1), challenge_8::step as fn(&str) -> String),
         ((15, 1), challenge_15::step_1 as fn(&str) -> String),
     ]);

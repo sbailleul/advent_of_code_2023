@@ -10,7 +10,8 @@
 				"serayuzgur.crates",
 				"tamasfe.even-better-toml",
 				"JScearcy.rust-doc-viewer",
-				"rust-lang.rust-analyzer"
+				"rust-lang.rust-analyzer",
+				"Swellaby.vscode-rust-test-adapter"
 			]
 		}
 	},
